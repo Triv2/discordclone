@@ -14,4 +14,6 @@ export const currentProfile = async () => {
       id: userId
     }
   });
+  
+  return profile;
 }
