@@ -1,11 +1,11 @@
 
-interface ServerPageProps {}
+interface ServerPageIdProps {}
 
-const ServerPage = () => {
+const ServerIdPage = () => {
   return (
 <div>
 ServerPage
 </div>
   );
 }
-export default ServerPage;
+export default ServerIdPage;
