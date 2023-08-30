@@ -1,5 +1,5 @@
 'use client'
-import {useState, useEffect} from'react'
+
 import {useParams, useRouter} from "next/navigation"
 import {cn} from "@/lib/utils"
 import { ActionTooltip } from "@/components/action-tooltip"
@@ -25,15 +25,7 @@ export const NavigationItem = ({
     router.push(`/servers/${id}`);
   };
 
-const [isMounted, setIsMounted] = useState(false);
 
-useEffect(() => {
-setIsMounted(true);
-}, []);
-
-if (!isMounted) {
-return null;
-}
   return (
    <ActionTooltip
      side="right"
