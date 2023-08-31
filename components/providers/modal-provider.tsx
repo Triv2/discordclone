@@ -3,6 +3,7 @@ import { CreateServerModal } from "@/components/modals/create-server-modal"
 import {useState, useEffect} from'react'
 import { InviteModal } from "@/components/modals/invite-modal";
 import { EditServerModal } from "@/components/modals/edit-server-modal";
+import { MembersModal } from "@/components/modals/members-modal";
 
 
 
@@ -23,6 +24,7 @@ return null;
      <CreateServerModal />
      <InviteModal />
      <EditServerModal/>
+     <MembersModal />
     </>
   );
 }
