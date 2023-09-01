@@ -47,12 +47,13 @@ export const MembersModal = () => {
     try{
       setLoadingId(memberId);
       const url = qs.stringifyUrl({
-        url:`api/members/${memberId}`,
+        url:`/api/members/${memberId}`,
         query :{
           serverId: server?.id,
           memberId,
         }
       });
+
       const response = await axios.patch(url, {role})
 
       router.refresh();

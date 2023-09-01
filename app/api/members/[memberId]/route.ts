@@ -4,13 +4,13 @@ import { NextResponse } from "next/server";
 
 export async function PATCH (
   req:Request,
-  {params}:{params:{memberId:string}},
+  { params }:{ params:{ memberId:string }},
 ) {
   try {
 
     const profile = await currentProfile();
-    const {searchParams} = new URL(req.url);
-    const {role} = await req.json();
+    const { searchParams}  = new URL(req.url);
+    const { role } = await req.json();
 
     const serverId=searchParams.get("serverId");
 
@@ -31,7 +31,7 @@ export async function PATCH (
         status: 400,
       });
     }
-    
+
     const server = await db.server.update({ 
       where: {
         id: serverId,
