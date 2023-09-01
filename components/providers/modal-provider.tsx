@@ -4,6 +4,7 @@ import {useState, useEffect} from'react'
 import { InviteModal } from "@/components/modals/invite-modal";
 import { EditServerModal } from "@/components/modals/edit-server-modal";
 import { MembersModal } from "@/components/modals/members-modal";
+import { CreateChannelModal } from "../modals/create-channel-modal";
 
 
 
@@ -25,6 +26,7 @@ return null;
      <InviteModal />
      <EditServerModal/>
      <MembersModal />
+     <CreateChannelModal/>
     </>
   );
 }
