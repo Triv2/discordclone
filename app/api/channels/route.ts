@@ -11,6 +11,12 @@ export async function POST(
 
     const serverId= searchParams.get('serverId');
 
+    if(!profile){
+      return new NextResponse("Unauthorized", { status: 401 });
+    }
+    if(!serverId){
+      return new NextResponse("Server ID missing", { status: 400 });
+    }
   } catch (error){
     console.log("[CHANNELS_POST]", error);
     return new NextResponse("Internal Error", {status: 500});
