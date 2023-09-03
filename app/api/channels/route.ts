@@ -11,7 +11,7 @@ export async function POST(
     const { name, type } = await req.json();
     const { searchParams } = new URL(req.url);
 
-    const serverId= searchParams.get('serverId');
+    const serverId = searchParams.get('serverId');
 
     if(!profile){
       return new NextResponse("Unauthorized", { status: 401 });
@@ -29,15 +29,15 @@ export async function POST(
       members: {
         some:{
           profileId: profile.id,
-          role:{
-            in: [MemberRole.ADMIN,MemberRole.MODERATOR]
+          role: {
+            in: [MemberRole.ADMIN, MemberRole.MODERATOR]
           }
         }
       }
       },
       data:{
         channels: {
-            create:{
+            create: {
               profileId: profile.id,
               name,
               type,
