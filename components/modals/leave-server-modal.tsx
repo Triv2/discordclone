@@ -8,7 +8,7 @@ import { useModal } from '@/hooks/use-modal-store';
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle} from "@/components/ui/dialog"
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle} from "@/components/ui/dialog"
 import { Check, Copy, RefreshCcw } from "lucide-react";
 
 
@@ -38,6 +38,9 @@ export const LeaveServerModal = () => {
           <DialogTitle className="text-2xl text-center font-bold">
             Leave Server
           </DialogTitle>
+          <DialogDescription>
+            Are you sure you want to leave <span>{server?.name}</span>?
+          </DialogDescription>
         </DialogHeader>
          <div className="p-6">
          Leave Server
