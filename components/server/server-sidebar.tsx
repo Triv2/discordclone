@@ -5,10 +5,20 @@ import { redirect } from "next/navigation";
 import { ServerHeader } from "./server-header";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { ServerSearch } from "./server-search";
+import { Hash, Mic, Video } from "lucide-react";
 
 interface ServerSidebarProps{
   serverId:string;
+}
 
+const iconMap = {
+  [ChannelType.TEXT]:<Hash className="mr-2 h-4 w-4"/>,
+  [ChannelType.AUDIO]:<Mic className="mr-2 h-4 w-4"/>,
+  [ChannelType.VIDEO]:<Video className="mr-2 h-4 w-4"/>,
+};
+
+const roleIconMap = {
+  
 }
 
 export const ServerSidebar = async ({
@@ -59,7 +69,7 @@ export const ServerSidebar = async ({
       <ServerHeader server={server} role={role} />
       <ScrollArea className="flex-1 px-3">
         <div className="mt-2">
-          <ServerSearch/>
+          <ServerSearch data ={}/>
         </div>
       </ScrollArea>
     </div>

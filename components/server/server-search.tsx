@@ -1,9 +1,19 @@
 'use client'
 import {useState, useEffect} from'react'
 
-interface ServerSearchProps {}
+interface ServerSearchProps {
+  data:{
+    label:string;
+    type: "channel" | "member";
+    data:{
+      icon:React.ReactNode;
+      id:string;
+      name:string;
+    }[] | undefined 
+  }[]
+}
 
-export const ServerSearch:React.FC<ServerSearchProps> = () => {
+export const ServerSearch= ({ data }:ServerSearchProps) => {
 
 const [isMounted, setIsMounted] = useState(false);
 
