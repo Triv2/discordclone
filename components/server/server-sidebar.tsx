@@ -1,11 +1,11 @@
 import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
-import { ChannelType } from "@prisma/client";
+import { ChannelType, MemberRole } from "@prisma/client";
 import { redirect } from "next/navigation";
 import { ServerHeader } from "./server-header";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { ServerSearch } from "./server-search";
-import { Hash, Mic, Video } from "lucide-react";
+import { Hash, Mic, ShieldAlert, ShieldCheck, Video } from "lucide-react";
 
 interface ServerSidebarProps{
   serverId:string;
@@ -18,7 +18,9 @@ const iconMap = {
 };
 
 const roleIconMap = {
-  
+  [MemberRole.GUEST]:null,
+  [MemberRole.MODERATOR]:<ShieldCheck className="mr-2 h-4 w-4 text-indigo-500"/>,
+  [MemberRole.ADMIN]:<ShieldAlert className="mr-2 h-4 w-4 text-indigo-500"/>,
 }
 
 export const ServerSidebar = async ({
