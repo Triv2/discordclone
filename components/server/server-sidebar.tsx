@@ -71,7 +71,35 @@ export const ServerSidebar = async ({
       <ServerHeader server={server} role={role} />
       <ScrollArea className="flex-1 px-3">
         <div className="mt-2">
-          <ServerSearch data ={}/>
+          <ServerSearch data ={[
+            {
+            label:"Text Channels",
+            type:"channel",
+            data:textChannels?.map((channel)=> ({
+              id:channel.id,
+              name:channel.name,
+              icon:iconMap[channel.type],
+            }))
+          },
+          {
+            label:"Voice Channels",
+            type:"channel",
+            data:audioChannels?.map((channel)=> ({
+              id:channel.id,
+              name:channel.name,
+              icon:iconMap[channel.type],
+            }))
+          },
+          {
+            label:"Video Channels",
+            type:"channel",
+            data:videoChannels?.map((channel)=> ({
+              id:channel.id,
+              name:channel.name,
+              icon:iconMap[channel.type],
+            }))
+          },
+          ]}/>
         </div>
       </ScrollArea>
     </div>
