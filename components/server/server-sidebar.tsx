@@ -115,7 +115,12 @@ export const ServerSidebar = async ({
         <Separator className="bg-zinc-200 dark:bg-zinc-700 rounded-md my-2"/>
         {!!textChannels?.length && (
           <div className="mb-2">
-            <ServerSection/>
+            <ServerSection
+              sectionType="channels"
+              channelType={ChannelType.TEXT}
+              role={role}
+              label="Text Channels"
+            />
           </div>
         )}
       </ScrollArea>
