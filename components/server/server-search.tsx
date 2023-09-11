@@ -19,6 +19,17 @@ export const ServerSearch= ({ data }:ServerSearchProps) => {
   
   const [open, setOpen] = useState(false);
   
+  useEffect(() => {
+   const down = (e:KeyboardEvent) => {
+    if(e.key === "k" && (e.metaKey || e.ctrlKey))
+    {
+      e.preventDefault();
+      setOpen((open) =>!open);
+      }
+   }
+   document.addEventListener("keydown", down);
+   return () => document.removeEventListener("keydown", down);
+  }, []);
 
   return (
     <>
@@ -38,7 +49,6 @@ export const ServerSearch= ({ data }:ServerSearchProps) => {
           <CommandEmpty>
             No Results Found
           </CommandEmpty>
-          
           {data.map(({label, type, data})=>{
             if(!data?.length) return null;
             return(
