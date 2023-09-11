@@ -19,21 +19,21 @@ export async function POST(
     if(!serverId){
       return new NextResponse("Server ID missing", { status: 400 });
     }
-    if(name=== "general"){
+    if(name === "general"){
       return new NextResponse("Name cannot be general", { status: 400 });
     }
 
     const server = await db.server.update({
       where: { 
         id: serverId,
-      members: {
-        some:{
-          profileId: profile.id,
-          role: {
-            in: [MemberRole.ADMIN, MemberRole.MODERATOR]
+        members: {
+          some:{
+            profileId: profile.id,
+            role: {
+              in: [MemberRole.ADMIN, MemberRole.MODERATOR]
+            }
           }
         }
-      }
       },
       data:{
         channels: {
@@ -45,7 +45,7 @@ export async function POST(
           }
         }
       });
-
+    
       return NextResponse.json(server);
 
   } catch (error){
