@@ -3,6 +3,8 @@
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
+import qs from "query-string";
 
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -34,8 +36,18 @@ export const ChatInput = ({
 
   const isLoading = form.formState.isSubmitting;
   
-  const onSubmit = async ( value: z.infer<typeof formSchema> ) => {
-    console.log(value);
+  const onSubmit = async ( values: z.infer<typeof formSchema> ) => {
+    try{
+      const url = qs.stringifyUrl({
+        url: apiUrl,
+        query,
+      });
+
+      await axios.post(url, values);
+
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   return (
