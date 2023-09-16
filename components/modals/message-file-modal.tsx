@@ -17,7 +17,7 @@ import { useModal } from '@/hooks/use-modal-store';
 
 
 const formSchema = z.object({
-  name: z.string().min(1,{message: 'Server name is required'}),
+ 
   imageUrl: z.string().min(1,{message: 'Server image is required'}),
 
 })
@@ -33,7 +33,7 @@ export const MessageFileModal = () => {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: '',
+     
       imageUrl: '',
     }
   });
@@ -64,10 +64,10 @@ export const MessageFileModal = () => {
       <DialogContent className= "bg-white text-black p-0 overflow-hidden">
         <DialogHeader className="pt-8 px-6">
           <DialogTitle className="text-2xl text-center font-bold">
-            Message File Modal
+            Add an attachment
           </DialogTitle>
           <DialogDescription className="text-center text-zinc-500 ">
-            Give your server a personality with a name and image that can be changed later.
+            Send a file as a message
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
@@ -81,7 +81,7 @@ export const MessageFileModal = () => {
                     <FormItem>
                       <FormControl>
                         <FileUpload
-                          endpoint="serverImage"
+                          endpoint="messageFile"
                           value={field.value}
                           onChange={field.onChange}
                         />
@@ -90,29 +90,11 @@ export const MessageFileModal = () => {
                  )}
                 />
               </div>
-              <FormField
-                control={form.control}
-                name="name"
-                render={({field}) => (
-                  <FormItem>
-                    <FormLabel className="uppercase text-cs font-bold text-zinc-500 dark:text-secondary/70">
-                      Server Name</FormLabel>
-                    <FormControl>
-                    <Input
-                      disabled={isLoading}
-                      {...field}
-                      placeholder="Enter your server name"
-                      className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
-                    />
-                    </FormControl>
-                    <FormMessage/>
-                  </FormItem>
-                  )}
-              />
+             
             </div>
             <DialogFooter className="bg-gray-100 px-6 py-4">
               <Button variant="primary" disabled={isLoading}>
-                  Create
+                  Send
               </Button>
             </DialogFooter>
           </form>
