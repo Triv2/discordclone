@@ -10,7 +10,10 @@ import { UserButton } from "@clerk/nextjs";
 
 
 
+
 export const NavigationSideBar = async () => {
+
+
 
   const profile = await currentProfile();
 

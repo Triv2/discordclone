@@ -16,6 +16,7 @@ export const ServerHeader = ({
   server, 
   role 
 }: ServerHeaderProps) => {
+
   const {onOpen} = useModal();
 
   const isAdmin = role === MemberRole.ADMIN;
