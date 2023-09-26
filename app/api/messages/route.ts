@@ -67,6 +67,10 @@ export async function GET(
     if(messages.length === MESSAGES_BATCH){
       nextCursor = messages[MESSAGES_BATCH - 1].id;
     }
+    return NextResponse.json({
+      items: messages,
+      nextCursor
+    });
 
   } catch (error) { 
     console.log("[MESSAGES_GET]", error)
