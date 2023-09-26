@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import * as z from "zod";
 import axios from "axios";
@@ -25,29 +25,29 @@ import { Button } from "@/components/ui/button";
 import { useModal } from "@/hooks/use-modal-store";
 
 interface ChatItemProps {
-  id:string;
-  content:string;
-  member:Member & {
+  id: string;
+  content: string;
+  member: Member & {
     profile: Profile;
   };
   timestamp: string;
-  fileUrl:string | null;
-  deleted:boolean;
-  currentMember:Member;
-  isUpdated:boolean;
+  fileUrl: string | null;
+  deleted: boolean;
+  currentMember: Member;
+  isUpdated: boolean;
   socketUrl: string;
-  socketQuery: Record <string,string>;
-}
+  socketQuery: Record<string, string>;
+};
 
-const roleIconMap= {
+const roleIconMap = {
   "GUEST": null,
-  "MODERATOR": <ShieldCheck className="h-4 w-4 ml-2 text-indigo-500"/>,
-  "ADMIN": <ShieldAlert className="h-4 w-4 ml-2 text-rose-500"/>,
+  "MODERATOR": <ShieldCheck className="h-4 w-4 ml-2 text-indigo-500" />,
+  "ADMIN": <ShieldAlert className="h-4 w-4 ml-2 text-rose-500" />,
 }
 
-const formSchema= z.object({
+const formSchema = z.object({
   content: z.string().min(1),
-})
+});
 
 export const ChatItem = ({
   id,
@@ -56,54 +56,58 @@ export const ChatItem = ({
   timestamp,
   fileUrl,
   deleted,
+  currentMember,
   isUpdated,
   socketUrl,
-  socketQuery,
-  currentMember,
-}:ChatItemProps) => {
+  socketQuery
+}: ChatItemProps) => {
   const [isEditing, setIsEditing] = useState(false);
-  const {onOpen } = useModal();
+  const { onOpen } = useModal();
   const params = useParams();
   const router = useRouter();
 
   const onMemberClick = () => {
-    if(member.id === currentMember.id){
+    if (member.id === currentMember.id) {
       return;
-    } 
+    }
+  
     router.push(`/servers/${params?.serverId}/conversations/${member.id}`);
   }
 
   useEffect(() => {
-    const handleKeyDown = (event:any) => {
-      if(event.key=== "Escape" || event.keyCode === 27){
+    const handleKeyDown = (event: any) => {
+      if (event.key === "Escape" || event.keyCode === 27) {
         setIsEditing(false);
       }
-  };
-  window.addEventListener("keydown", handleKeyDown);
-  return () => window.removeEventListener("keydown", handleKeyDown);
-}, []);
+    };
 
-  const form = useForm({
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => window.removeEventListener("keyDown", handleKeyDown);
+  }, []);
+
+  const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      content: content,
-    },
-  })
+      content: content
+    }
+  });
 
   const isLoading = form.formState.isSubmitting;
 
-  const onSubmit = async (values:z.infer<typeof formSchema>) => {
-    try{
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
       const url = qs.stringifyUrl({
-        url:`${socketUrl}/${id}`,
+        url: `${socketUrl}/${id}`,
         query: socketQuery,
       });
 
       await axios.patch(url, values);
+
       form.reset();
       setIsEditing(false);
-    } catch(error){
-      console.error(error);
+    } catch (error) {
+      console.log(error);
     }
   }
 
@@ -111,19 +115,19 @@ export const ChatItem = ({
     form.reset({
       content: content,
     })
-    },[content]);
+  }, [form,content]);
 
-    const fileType = fileUrl?.split(".").pop();
+  const fileType = fileUrl?.split(".").pop();
 
-    const isAdmin = currentMember.role === MemberRole.ADMIN;
-    const isModerator = currentMember.role === MemberRole.MODERATOR;
-    const isOwner = currentMember.id === member.id;
-    const canDeleteMessage = !deleted && (isAdmin || isModerator || isOwner);
-    const canEditMessage = !deleted && isOwner && !fileUrl;
-    const isPDF = fileType === "pdf" && fileUrl;
-    const isImage = !isPDF && fileUrl;
+  const isAdmin = currentMember.role === MemberRole.ADMIN;
+  const isModerator = currentMember.role === MemberRole.MODERATOR;
+  const isOwner = currentMember.id === member.id;
+  const canDeleteMessage = !deleted && (isAdmin || isModerator || isOwner);
+  const canEditMessage = !deleted && isOwner && !fileUrl;
+  const isPDF = fileType === "pdf" && fileUrl;
+  const isImage = !isPDF && fileUrl;
 
-  return(
+  return (
     <div className="relative group flex items-center hover:bg-black/5 p-4 transition w-full">
       <div className="group flex gap-x-2 items-start w-full">
         <div onClick={onMemberClick} className="cursor-pointer hover:drop-shadow-md transition">
