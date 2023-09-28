@@ -34,7 +34,7 @@ export const MediaRoom = ({
       } catch (error) {
         console.log(error);
       }
-    })
+    })();
   }, [user?.firstName, user?.lastName, chatId]);
 
   if(token===""){
