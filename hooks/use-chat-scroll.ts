@@ -14,39 +14,44 @@ export const useChatScroll = ({
   shouldLoadMore,
   loadMore,
   count,
-}:ChatScrollProps) =>{
-
+}: ChatScrollProps) => {
   const [hasInitialized, setHasInitialized] = useState(false);
 
   useEffect(() => {
-    const topDiv = chatRef.current;
+    const topDiv = chatRef?.current;
+
     const handleScroll = () => {
-      const scrollTop =topDiv?.scrollTop;
-      if(scrollTop === 0 && shouldLoadMore){
-        loadMore();
+      const scrollTop = topDiv?.scrollTop;
+
+      if (scrollTop === 0 && shouldLoadMore) {
+        loadMore()
       }
     };
+
     topDiv?.addEventListener("scroll", handleScroll);
+
     return () => {
       topDiv?.removeEventListener("scroll", handleScroll);
-    };
-  },[shouldLoadMore, loadMore, chatRef]);
+    }
+  }, [shouldLoadMore, loadMore, chatRef]);
 
   useEffect(() => {
     const bottomDiv = bottomRef?.current;
     const topDiv = chatRef.current;
     const shouldAutoScroll = () => {
-      if(!hasInitialized && bottomDiv){
+      if (!hasInitialized && bottomDiv) {
         setHasInitialized(true);
         return true;
-     }
-      if(!topDiv){
+      }
+
+      if (!topDiv) {
         return false;
       }
 
       const distanceFromBottom = topDiv.scrollHeight - topDiv.scrollTop - topDiv.clientHeight;
-      return distanceFromBottom<=100;
+      return distanceFromBottom <= 100;
     }
+
     if (shouldAutoScroll()) {
       setTimeout(() => {
         bottomRef.current?.scrollIntoView({
@@ -54,5 +59,5 @@ export const useChatScroll = ({
         });
       }, 100);
     }
-  },[count, bottomRef,chatRef, hasInitialized]);
+  }, [bottomRef, chatRef, count, hasInitialized]);
 }
