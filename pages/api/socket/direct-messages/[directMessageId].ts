@@ -13,7 +13,7 @@ export default async function handler(
     }
     try{
       const profile = await currentProfilePages(req);
-      const {directMessageId,conversationId} = req.query;
+      const { directMessageId, conversationId} = req.query;
       const { content } = req.body;
 
       if(!profile){
@@ -21,7 +21,7 @@ export default async function handler(
       }
 
       if(!conversationId){
-        return res.status(400).json({ error:"Conversation ID missing" })
+        return res.status(400).json({ error:"Conversation ID not here" })
       }
 
 
@@ -138,7 +138,7 @@ export default async function handler(
       return res.status(200).json(directMessage);
 
     } catch(error) {
-      console.log("[MESSAGE_ID]",error);
+      console.log("[DIRECT_MESSAGE_ID]",error);
       return res.status(500).json({ error:"Internal Error"})
     }
   }
