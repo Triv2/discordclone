@@ -1,3 +1,10 @@
-This is a clone of Discord from the tutorial of Antonio Erdeljac: https://github.com/AntonioErdeljac/next13-discord-clone
+# Discord-Clone, a Team Chat Application
 
-This one has been modified a bit to fix a few errors, such as the user pop-up modal from clerk not working on mobile. Also fixes the invite-code link not working for people not registered.
+This is project is built from the **Discord-Clone** tutorial of *Antonio Erdeljac*
+- [Github Repo](https://github.com/AntonioErdeljac/next13-discord-clone)
+- [Tutorial Video](https://www.codewithantonio.com/projects/team-chat-platform)
+
+## Modifications
+- Invite Url link fix, that allows users that are un-registered to be onboarded and added to groups.
+- UI responsivness and Clerk modal pop-up error fixed
+- Livekit lastname/firstname issue fixed with userName from Clerk.
